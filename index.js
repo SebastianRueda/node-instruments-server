@@ -1,5 +1,10 @@
 const express = require('express');
+const cors = require('cors');
+
 const app = express();
+
+app.use(cors())
+app.options('*', cors())
 
 app.use(express.json())
 
@@ -32,7 +37,7 @@ app.get('/api/instruments', (req, res) => {
 
 app.get('/api/instruments/search', (req, res) => {
     const filtered = instruments.filter((inst) => {
-        return inst.type.includes(req.query.q)
+        return inst.id.includes(req.query.q)
     })
 
     res.send(filtered)
